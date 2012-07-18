@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class FaceView; // forward reference
+
+@protocol FaceViewDataSource
+
+- (float)smileForFaceView:(FaceView *)sender;
+
+@end
+
 @interface FaceView : UIView
 
 #define DEFAULT_SCALE 0.9
@@ -21,5 +29,7 @@
 @property (nonatomic) CGFloat scale;
 
 - (void)pinch:(UIPinchGestureRecognizer *)gesture;
+
+@property (nonatomic, weak) IBOutlet id <FaceViewDataSource> dataSource;
 
 @end

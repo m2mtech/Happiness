@@ -10,6 +10,7 @@
 
 @implementation FaceView
 
+@synthesize dataSource = _dataSource;
 @synthesize scale = _scale;
 
 - (CGFloat)scale
@@ -102,7 +103,9 @@
     CGPoint mouthCP2 = mouthEnd;
     mouthCP2.x -= MOUTH_H * size * 0.66;
     
-    float smile = 1;
+    float smile = [self.dataSource smileForFaceView:self];
+    if (smile < -1) smile = -1;
+    if (smile > 1) smile = 1;
     
     CGFloat smileOffset = MOUTH_SMILE * size * smile;
     mouthCP1.y += smileOffset;
